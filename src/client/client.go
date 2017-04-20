@@ -1,4 +1,4 @@
-package main
+package client
 
 import (
    // "bytes"
@@ -9,17 +9,23 @@ import (
    // "net/http"
     )
 
-const(
-    id = 0
-    LOCALDIR = "../files"
-    MYADDR = ""
-    REMOTEADDR = ""
-)
 
 func Run(localDir string, myAddr string, remoteAddr string) error{
     log.Println("run")
+
+    client, ok := rpc.DialHTTP("tcp", myAddr)
+    if ok != nil {
+        return ok
+    }
+
+    ok = StartSrv(client, localDir)
+        if ok != nil {
+            return ok
+        }
+
     return nil
 }
+
 
 
 func StartSrv(client *rpc.Client, dir string) error {
@@ -28,13 +34,3 @@ func StartSrv(client *rpc.Client, dir string) error {
     return ok
     }
 
-
-func main() {
-    ok :=Run(LOCALDIR, MYADDR, REMOTEADDR)
-    if ok != nil{
-        log.Fatal(ok)
-    }
-    // if err := Run(LOCALDIR, MYADDR, REMOTEADDR); err != nil {
-    //     log.Fatal(err)
-    // }
-}
