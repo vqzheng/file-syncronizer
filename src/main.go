@@ -1,7 +1,7 @@
 package main
 
 import (
-	"client"
+	"CL"
 	"log"
 	)
 
@@ -13,7 +13,7 @@ const(
 )
 
 func main() {
-    ok := client.Run(LOCALDIR, MYADDR, REMOTEADDR)
+    ok := CL.Run(LOCALDIR, MYADDR, REMOTEADDR)
     if ok != nil{
         log.Fatal(ok)
     }

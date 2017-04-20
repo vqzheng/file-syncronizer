@@ -8,41 +8,51 @@ import (
     "net/rpc"
     "net"
     "net/http"
-    "errors"
+    "os"
+  // "errors"
     )
 
-type Args struct {
-    A, B int
+type Server int
+
+var (
+	Database int
+	initialized bool
+)
+
+func (sr *Server) Init(dir *string, reply *int) error {
+	err := os.Chdir(*dir)
+	if err != nil {
+		return err
+	}
+
+	// localDb, err = db.ParseFile()
+	// if err == db.FileNotFound {
+	// 	initialized = true
+	// 	return nil
+	// } else if err != nil {
+	// 	return err
+	// }
+
+	// localDb.VersionVec[localDb.ReplicaId] += 1
+
+	// log.Println(localDb)
+	// if err := localDb.Update(); err != nil {
+	// 	return err
+	// }
+
+	initialized = true
+	return nil
 }
 
-type Quotient struct {
-    Quo, Rem int
-}
-
-type Arith int
-
-func (t *Arith) Multiply(args *Args, reply *int) error {
-    *reply = args.A * args.B
-    return nil
-}
-
-func (t *Arith) Divide(args *Args, quo *Quotient) error {
-    if args.B == 0 {
-        return errors.New("divide by zero")
-    }
-    quo.Quo = args.A / args.B
-    quo.Rem = args.A % args.B
-    return nil
-}
 
 func main() {
-    arith := new(Arith)
-rpc.Register(arith)
-rpc.HandleHTTP()
-l, e := net.Listen("tcp", ":1234")
-if e != nil {
-    log.Fatal("listen error:", e)
-}
-http.Serve(l, nil)
+    server := new(Server)
+	rpc.Register(server)
+	rpc.HandleHTTP()
+	l, ok := net.Listen("tcp", ":1234")
+	if ok != nil {
+   		log.Fatal("listen error:", ok)
+	}
+	http.Serve(l, nil)
 }
 

@@ -1,4 +1,4 @@
-package client
+package CL
 
 import (
    // "bytes"
@@ -17,6 +17,7 @@ func Run(localDir string, myAddr string, remoteAddr string) error{
     if ok != nil {
         return ok
     }
+    log.Println("connected ")
 
     ok = StartSrv(client, localDir)
         if ok != nil {
@@ -30,7 +31,7 @@ func Run(localDir string, myAddr string, remoteAddr string) error{
 
 func StartSrv(client *rpc.Client, dir string) error {
     var reply bool
-    ok := client.Call("Server.init", &dir, &reply)
+    ok := client.Call("Server.Init", &dir, &reply)
     return ok
     }
 
