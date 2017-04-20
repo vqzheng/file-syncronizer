@@ -9,9 +9,8 @@ import (
     )
 
 
-
-
-
-
-
-func StartSrv(client *rpc.Client)
+func StartSrv(client *rpc.Client, dir string) error {
+    reply bool
+    ok := client.Call("Server.init", &dir, &reply)
+    return ok
+    }
