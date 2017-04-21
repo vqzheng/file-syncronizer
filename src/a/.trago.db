@@ -1,0 +1,6 @@
+replica mtjhp8mpgkxf2o5m
+version 1n4sisz6jk6bvzlb:32 mtjhp8mpgkxf2o5m:32
+# files
+file frist copy.txt 5 1492815229000000000 mtjhp8mpgkxf2o5m:32 %!s(bool=true)%!(EXTRA string=949fbbff46e9c2e59b40ea5e3702634f)
+file frist.txt 19 1492817050000000000 mtjhp8mpgkxf2o5m:32 %!s(bool=true)%!(EXTRA string=595e88012a6521aae3e12cbebe76eb9e)
+file .DS_Store 6148 1492817041000000000 mtjhp8mpgkxf2o5m:32 %!s(bool=true)%!(EXTRA string=194577a7e20bdcc7afbb718f502c134c)
